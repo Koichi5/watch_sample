@@ -93,7 +93,7 @@ class TodoManager: NSObject, ObservableObject {
 }
 
 extension TodoManager: WCSessionDelegate {
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error = error {
             print("WCSession activation failed with error: \(error.localizedDescription)")
         } else {
@@ -101,17 +101,16 @@ extension TodoManager: WCSessionDelegate {
         }
     }
     
-    func sessionDidBecomeInactive(_ session: WCSession) {
+    nonisolated func sessionDidBecomeInactive(_ session: WCSession) {
         print("WCSession became inactive")
     }
     
-    func sessionDidDeactivate(_ session: WCSession) {
+    nonisolated func sessionDidDeactivate(_ session: WCSession) {
         print("WCSession deactivated")
-        // Reactivate the session
         WCSession.default.activate()
     }
     
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+    nonisolated func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         guard let encodedTodos = message["todos"] as? Data else {
             print("Received message does not contain todos data")
             replyHandler(["status": "error", "message": "Invalid data received"])
@@ -131,7 +130,6 @@ extension TodoManager: WCSessionDelegate {
     }
     
     private func updateLocalTodos(with receivedTodos: [Todo]) {
-        // 既存のtodosをクリアし、受信したtodosで置き換える
         for todo in todos {
             modelContext.delete(todo)
         }

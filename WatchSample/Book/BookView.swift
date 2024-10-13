@@ -9,33 +9,18 @@ import SwiftUI
 import SwiftData
 
 struct BookView: View {
-    @StateObject private var bookManager = BookManager()
+    @ObservedObject var bookManager = BookManager()
+    @ObservedObject var recordManager: RecordManager
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                List {
-                    ForEach(bookManager.books) { book in
-                        BookRow(book: book, geometry: geometry)
-                    }
-                    .onDelete(perform: deleteBooks)
+        GeometryReader { geometry in
+            List {
+                ForEach(bookManager.books) { book in
+                    BookRow(book: book, geometry: geometry, recordManager: recordManager)
                 }
-                .navigationTitle("Books")
-                .toolbar {
-                    NavigationLink(destination: AddBookView(addBook: addBook)) {
-                        VStack {
-                            Text("Add Book")
-                        }
-                    }
-                    EditButton()
-                }
+                .onDelete(perform: deleteBooks)
             }
         }
-    }
-    
-    private func addBook(title: String, publisher: String, imageUrl: String) {
-        let newBook = Book(title: title, publisher: publisher, imageUrl: imageUrl)
-        bookManager.addBook(newBook)
     }
     
     private func deleteBooks(at offset: IndexSet) {
@@ -48,51 +33,27 @@ struct BookView: View {
 struct BookRow: View {
     let book: Book
     let geometry: GeometryProxy
+    let recordManager: RecordManager
     
     var body: some View {
         let imageUrl = URL(string: book.imageUrl)
-        HStack {
-            AsyncImage(url: imageUrl) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(width: geometry.size.width * 0.15, height: geometry.size.width * 0.15 * 1.5)
-            
-            VStack {
-                Text(book.title)
-                Text(book.publisher)
-            }
-        }
-    }
-}
-
-struct AddBookView: View {
-    let addBook: (_ title: String, _ publisher: String, _ imageUrl: String) -> Void
-    
-    @State private var bookTitle = ""
-    @State private var bookPublisher = ""
-    @State private var bookImageUrl = ""
-    
-    var body: some View {
-        NavigationStack {
-            VStack {
-                    TextField("Title", text: $bookTitle)
-                    .padding()
-                    TextField("Publisher", text: $bookPublisher)
-                    .padding()
-                    TextField("Image URL", text: $bookImageUrl)
-                    .padding()
-                Spacer()
-                Button(action: {
-                    addBook(bookTitle, bookPublisher, bookImageUrl)
-                }, label: {
-                    Text("Add Book")
-                })
+        NavigationLink(destination: BookDetailView(book: book, recordManager: recordManager)) {
+            HStack {
+                AsyncImage(url: imageUrl) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: geometry.size.width * 0.13, height: geometry.size.width * 0.13 * 1.5)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(book.title)
+                        .fontWeight(.bold)
+                    Text(book.publisher)
+                        .foregroundStyle(Color.secondary)
+                }
                 .padding()
             }
-            .navigationTitle("Add Book")
-            .padding()
         }
     }
 }

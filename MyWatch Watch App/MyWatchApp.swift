@@ -7,6 +7,7 @@
 
 // TodoApp
 //import SwiftUI
+//import SwiftData
 //
 //@main
 //struct MyWatch_Watch_AppApp: App {
@@ -14,19 +15,24 @@
 //        WindowGroup {
 //            TodoView()
 //        }
+//        .modelContainer(for: Todo.self)
 //    }
 //}
 
 // BookApp
 import SwiftUI
-import SwiftData
+import WatchKit
 
 @main
 struct BookApp: App {
+    let dataController = DataController.shared
+    let connectivityManager = WatchConnectivityManager.shared // ここで初期化
+
     var body: some Scene {
         WindowGroup {
             BookView()
+                .environmentObject(dataController)
         }
-        .modelContainer(for: Book.self)
+        .modelContainer(dataController.container)
     }
 }

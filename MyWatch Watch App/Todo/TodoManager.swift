@@ -93,7 +93,7 @@ class TodoManager: NSObject, ObservableObject {
 }
 
 extension TodoManager: WCSessionDelegate {
-    func session(
+    nonisolated func session(
         _ session: WCSession,
         activationDidCompleteWith activationState: WCSessionActivationState,
         error: Error?
@@ -105,7 +105,7 @@ extension TodoManager: WCSessionDelegate {
         }
     }
     
-    func session(
+    nonisolated func session(
         _ session: WCSession,
         didReceiveMessage message: [String : Any],
         replyHandler: @escaping ([String : Any]) -> Void
@@ -129,7 +129,6 @@ extension TodoManager: WCSessionDelegate {
     }
     
     private func updateLocalTodos(with receivedTodos: [Todo]) {
-        // 既存のtodosをクリアし、受信したtodosで置き換える
         for todo in todos {
             modelContext.delete(todo)
         }

@@ -36,7 +36,7 @@
 //import SwiftData
 //
 //@main
-//struct TodoApp: App {
+//struct WatchSampleApp: App {
 //    var body: some Scene {
 //        WindowGroup {
 //            TodoView()
@@ -45,17 +45,20 @@
 //    }
 //}
 
+
 // BookApp
 import SwiftUI
-import SwiftData
 
 @main
 struct BookApp: App {
+    let dataController = DataController.shared
+    let connectivityManager = WatchConnectivityManager.shared
+
     var body: some Scene {
         WindowGroup {
-            BookView()
+            HomeView()
+                .environmentObject(dataController)
         }
-        .modelContainer(for: Book.self)
+        .modelContainer(dataController.container)
     }
 }
-

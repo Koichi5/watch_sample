@@ -11,6 +11,7 @@ import SwiftData
 @Model
 final class Record {
     var id: UUID
+    @Relationship(deleteRule: .cascade)
     var book: Book
     var seconds: Int
     var lastModified: Date

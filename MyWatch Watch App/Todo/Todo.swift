@@ -23,7 +23,6 @@ final class Todo {
     }
 }
 
-// Codableに準拠させるための拡張
 extension Todo: Codable {
     enum CodingKeys: String, CodingKey {
         case id, title, isCompleted, lastModified
