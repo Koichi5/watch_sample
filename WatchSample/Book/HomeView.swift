@@ -43,9 +43,6 @@ struct HomeView: View {
                             Image(systemName: "plus")
                         }
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
                 }
             }
         }

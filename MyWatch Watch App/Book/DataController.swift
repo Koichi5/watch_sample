@@ -65,7 +65,6 @@ class DataController: NSObject, ObservableObject {
                     }
                 }
 
-                // 次にRecordを処理
                 for recordDTO in syncData.records {
                     let record = try await recordDTO.toRecord(context: context)
                     if let existingRecord = try await context.fetch(FetchDescriptor<Record>(predicate: #Predicate { $0.id == record.id })).first {
@@ -97,18 +96,20 @@ struct RecordDTO: Codable {
     let id: UUID
     let bookID: UUID
     let seconds: Int
+    let createdAt: Date
     let lastModified: Date
     
     init(record: Record) {
         self.id = record.id
         self.bookID = record.book.id
         self.seconds = record.seconds
+        self.createdAt = record.createdAt
         self.lastModified = record.lastModified
     }
     
     func toRecord(context: ModelContext) async throws -> Record {
         if let book = try await context.fetch(FetchDescriptor<Book>(predicate: #Predicate { $0.id == bookID })).first {
-            return Record(id: id, book: book, seconds: seconds, lastModified: lastModified)
+            return Record(id: id, book: book, seconds: seconds, createdAt: createdAt, lastModified: lastModified)
         } else {
             throw NSError(domain: "DataController", code: 404, userInfo: [NSLocalizedDescriptionKey: "Book not found for Record"])
         }

@@ -16,50 +16,57 @@ struct BookDetailView: View {
     @State private var timer: Timer?
 
     var body: some View {
-        VStack(spacing: 10) {
-            AsyncImage(url: URL(string: book.imageUrl)) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(width: 80, height: 120)
-            .cornerRadius(5)
-
-            Text(book.title)
-                .font(.headline)
-                .multilineTextAlignment(.center)
-
-            Text(formatTime(seconds: seconds))
-                .font(.title2)
-                .bold()
-
-            HStack {
-                Button(action: {
-                    isStudying.toggle()
-                    if isStudying {
-                        startTimer()
-                    } else {
-                        stopTimer()
+        GeometryReader { geometry in
+            VStack(spacing: 10) {
+                HStack {
+                    AsyncImage(url: URL(string: book.imageUrl)) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
                     }
-                }) {
-                    Text(isStudying ? "Stop" : "Start")
-                        .frame(maxWidth: .infinity)
+                    .frame(width: geometry.size.width * 0.2, height: geometry.size.width * 0.2 * 1.5)
+                    .cornerRadius(5)
+                    
+                    Text(book.title)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .font(.headline)
+                        .multilineTextAlignment(.leading)
+                        .padding()
                 }
-                .buttonStyle(StudyButtonStyle(isStudying: isStudying))
-
-                Button(action: {
-                    saveRecord()
-                }) {
-                    Text("Save")
-                        .frame(maxWidth: .infinity)
+                
+                Text(formatTime(seconds: seconds))
+                    .font(.title2)
+                    .bold()
+                
+                HStack {
+                    Button(action: {
+                        isStudying.toggle()
+                        if isStudying {
+                            startTimer()
+                        } else {
+                            stopTimer()
+                        }
+                    }) {
+                        Text(isStudying ? "Stop" : "Start")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(StudyButtonStyle(isStudying: isStudying))
+                    
+                    Button(action: {
+                        saveRecord()
+                    }) {
+                        Text("Save")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(SaveButtonStyle(isDisabled: seconds == 0))
+                    .disabled(seconds == 0)
                 }
-                .buttonStyle(StudyButtonStyle())
-                .disabled(seconds == 0)
+                .padding()
             }
-            .padding(.top, 10)
+            .padding()
+            .navigationTitle("Studying")
         }
-        .padding()
-        .navigationTitle("Reading")
     }
 
     private func startTimer() {
@@ -94,6 +101,19 @@ struct StudyButtonStyle: ButtonStyle {
         configuration.label
             .padding()
             .background(isStudying ? Color.red : Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+    }
+}
+
+struct SaveButtonStyle: ButtonStyle {
+    var isDisabled: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(isDisabled ? Color.gray : Color.blue)
             .foregroundColor(.white)
             .cornerRadius(8)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)

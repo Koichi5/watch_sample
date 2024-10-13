@@ -5,8 +5,6 @@
 //  Created by Koichi Kishimoto on 2024/10/09.
 //
 
-// RecordManager.swift (watchOS)
-
 import SwiftUI
 import SwiftData
 import Combine
@@ -35,7 +33,8 @@ class RecordManager: ObservableObject {
     }
 
     func addRecord(book: Book, seconds: Int) {
-        let record = Record(book: book, seconds: seconds)
+        let createdAt = Date()
+        let record = Record(book: book, seconds: seconds, createdAt: createdAt)
         modelContext.insert(record)
         saveRecords()
     }

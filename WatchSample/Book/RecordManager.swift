@@ -35,7 +35,8 @@ class RecordManager: ObservableObject {
     }
     
     func addRecord(book: Book, seconds: Int) {
-        let record = Record(book: book, seconds: seconds)
+        let createdAt = Date()
+        let record = Record(book: book, seconds: seconds, createdAt: createdAt)
         modelContext.insert(record)
         saveRecords()
     }

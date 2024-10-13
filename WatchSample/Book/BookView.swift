@@ -48,9 +48,10 @@ struct BookRow: View {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(book.title)
-                        .fontWeight(.bold)
+                        .font(.headline)
                     Text(book.publisher)
-                        .foregroundStyle(Color.secondary)
+                        .font(.caption)
+                        .foregroundStyle(Color.gray)
                 }
                 .padding()
             }

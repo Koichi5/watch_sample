@@ -56,6 +56,7 @@ struct BookRow: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
+            .padding()
         }
     }
 }

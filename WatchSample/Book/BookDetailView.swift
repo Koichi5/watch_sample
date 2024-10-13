@@ -37,32 +37,35 @@ struct BookDetailView: View {
                             .font(.largeTitle)
                             .padding()
                         
-                        Button(action: {
-                            isStudying.toggle()
-                            if isStudying {
-                                startTimer()
-                            } else {
-                                stopTimer()
-                            }
-                        }) {
-                            Text(isStudying ? "Stop" : "Start")
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                        }
-                        .buttonStyle(StudyButtonStyle(isStudying: isStudying))
-                        .padding()
-                        
                         Spacer()
-                        Button(action: {
-                            recordManager.addRecord(book: book, seconds: seconds)
-                            stopTimer()
-                            seconds = 0
-                            isStudying = false
-                        }) {
-                            Text("Save")
-                                .frame(minWidth: 0, maxWidth: .infinity)
+                        HStack {
+                            Button(action: {
+                                isStudying.toggle()
+                                if isStudying {
+                                    startTimer()
+                                } else {
+                                    stopTimer()
+                                }
+                            }) {
+                                Text(isStudying ? "Stop" : "Start")
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                            }
+                            .buttonStyle(StudyButtonStyle(isStudying: isStudying))
+                            .padding()
+                            
+                            Button(action: {
+                                recordManager.addRecord(book: book, seconds: seconds)
+                                stopTimer()
+                                seconds = 0
+                                isStudying = false
+                            }) {
+                                Text("Save")
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                            }
+                            .buttonStyle(SaveButtonStyle(isDisabled: seconds == 0))
+                            .disabled(seconds == 0)
+                            .padding()
                         }
-                        .buttonStyle(StudyButtonStyle())
-                        .padding()
                     }
                     .padding()
                 }
@@ -99,5 +102,18 @@ struct StudyButtonStyle: ButtonStyle {
             .foregroundColor(.white)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
+    }
+}
+
+struct SaveButtonStyle: ButtonStyle {
+    var isDisabled: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(isDisabled ? Color.gray : Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
     }
 }

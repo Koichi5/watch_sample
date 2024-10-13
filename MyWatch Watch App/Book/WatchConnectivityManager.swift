@@ -5,8 +5,6 @@
 //  Created by Koichi Kishimoto on 2024/10/13.
 //
 
-// WatchConnectivityManager.swift (watchOS)
-
 import Foundation
 import WatchConnectivity
 
