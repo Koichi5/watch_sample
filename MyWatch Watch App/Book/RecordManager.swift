@@ -52,8 +52,8 @@ class RecordManager: ObservableObject {
     private func saveRecords() {
         do {
             try modelContext.save()
-            fetchRecords()
             DataController.shared.syncData()
+            fetchRecords()
         } catch {
             print("Error saving records: \(error)")
         }

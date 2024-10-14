@@ -17,6 +17,9 @@ struct RecordView: View {
                     RecordRow(record: record, geometry: geometry)
                 }
                 .onDelete(perform: deleteRecord)
+                .refreshable {
+                    recordManager.fetchRecords()
+                }
             }
         }
     }
