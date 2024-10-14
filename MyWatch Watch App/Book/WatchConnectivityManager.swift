@@ -25,7 +25,9 @@ class WatchConnectivityManager: NSObject, ObservableObject {
 
     func sendData(_ data: Data) {
         if WCSession.default.isReachable {
-            WCSession.default.sendMessage(["data": data], replyHandler: nil) { error in
+            WCSession.default.sendMessage(["data": data], replyHandler: { reply in
+                print("Send data Reply: \(reply)")
+            }) { error in
                 print("Error sending data via sendMessage: \(error.localizedDescription)")
             }
         } else {
@@ -61,19 +63,19 @@ extension WatchConnectivityManager: WCSessionDelegate {
         print("Session reachability changed: \(session.isReachable)")
     }
 
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+    @MainActor func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         handleReceivedData(message)
     }
 
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+    @MainActor func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         handleReceivedData(applicationContext)
     }
 
-    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
+    @MainActor func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
         handleReceivedData(userInfo)
     }
 
-    private func handleReceivedData(_ dataDictionary: [String: Any]) {
+    @MainActor private func handleReceivedData(_ dataDictionary: [String: Any]) {
         print("Received data dictionary: \(dataDictionary)")
         guard let data = dataDictionary["data"] as? Data else {
             print("Invalid data received")

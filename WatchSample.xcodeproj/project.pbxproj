@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A41E3342CBD043E004286B9 /* DataControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E3332CBD043B004286B9 /* DataControllerTest.swift */; };
+		8A41E3362CBD04A4004286B9 /* WatchConnectivityManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E3352CBD04A2004286B9 /* WatchConnectivityManagerTest.swift */; };
+		8A41E3382CBD05A0004286B9 /* MockWatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E3372CBD059F004286B9 /* MockWatchConnectivityManager.swift */; };
+		8A41E33A2CBD0727004286B9 /* RecordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E3392CBD0727004286B9 /* RecordDTO.swift */; };
+		8A41E33C2CBD074E004286B9 /* SyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E33B2CBD074E004286B9 /* SyncData.swift */; };
+		8A41E3402CBD0C90004286B9 /* WCSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E33F2CBD0C8F004286B9 /* WCSessionProtocol.swift */; };
+		8A41E3422CBD0CD5004286B9 /* MockWCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E3412CBD0CD4004286B9 /* MockWCSession.swift */; };
+		8A41E3462CBD0D75004286B9 /* DataControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E3452CBD0D74004286B9 /* DataControllerProtocol.swift */; };
+		8A41E3482CBD0DE3004286B9 /* MockDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A41E3472CBD0DDF004286B9 /* MockDataController.swift */; };
 		8A4BA03E2CB6737A000D16F9 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4BA03D2CB67377000D16F9 /* Record.swift */; };
 		8A4BA0402CB674DB000D16F9 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4BA03F2CB674DB000D16F9 /* Record.swift */; };
 		8A4BA0422CB67FE6000D16F9 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4BA0412CB67FE3000D16F9 /* RecordManager.swift */; };
@@ -108,6 +117,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A41E3332CBD043B004286B9 /* DataControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerTest.swift; sourceTree = "<group>"; };
+		8A41E3352CBD04A2004286B9 /* WatchConnectivityManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManagerTest.swift; sourceTree = "<group>"; };
+		8A41E3372CBD059F004286B9 /* MockWatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWatchConnectivityManager.swift; sourceTree = "<group>"; };
+		8A41E3392CBD0727004286B9 /* RecordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDTO.swift; sourceTree = "<group>"; };
+		8A41E33B2CBD074E004286B9 /* SyncData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncData.swift; sourceTree = "<group>"; };
+		8A41E33F2CBD0C8F004286B9 /* WCSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionProtocol.swift; sourceTree = "<group>"; };
+		8A41E3412CBD0CD4004286B9 /* MockWCSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWCSession.swift; sourceTree = "<group>"; };
+		8A41E3452CBD0D74004286B9 /* DataControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerProtocol.swift; sourceTree = "<group>"; };
+		8A41E3472CBD0DDF004286B9 /* MockDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataController.swift; sourceTree = "<group>"; };
 		8A4BA03D2CB67377000D16F9 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		8A4BA03F2CB674DB000D16F9 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		8A4BA0412CB67FE3000D16F9 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
@@ -209,6 +227,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A41E3322CBD0434004286B9 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				8A41E3472CBD0DDF004286B9 /* MockDataController.swift */,
+				8A41E3412CBD0CD4004286B9 /* MockWCSession.swift */,
+				8A41E3372CBD059F004286B9 /* MockWatchConnectivityManager.swift */,
+				8A41E3352CBD04A2004286B9 /* WatchConnectivityManagerTest.swift */,
+				8A41E3332CBD043B004286B9 /* DataControllerTest.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
 		8A80922B2CB5916800F4E940 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +249,10 @@
 		8A8092302CB59BBF00F4E940 /* Book */ = {
 			isa = PBXGroup;
 			children = (
+				8A41E3452CBD0D74004286B9 /* DataControllerProtocol.swift */,
+				8A41E33F2CBD0C8F004286B9 /* WCSessionProtocol.swift */,
+				8A41E33B2CBD074E004286B9 /* SyncData.swift */,
+				8A41E3392CBD0727004286B9 /* RecordDTO.swift */,
 				8A65F0312CBB9CDC0074F458 /* WatchConnectivityManager.swift */,
 				8A5D52372CBB953600A7F45E /* DataController.swift */,
 				8A4BA0432CB67FEB000D16F9 /* RecordView.swift */,
@@ -304,6 +338,7 @@
 		8A81E6FA2CB5441600B649CA /* WatchSampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				8A41E3322CBD0434004286B9 /* Book */,
 				8A81E6F92CB5441600B649CA /* WatchSampleTests.swift */,
 			);
 			path = WatchSampleTests;
@@ -617,9 +652,11 @@
 			files = (
 				8A81E6F62CB5441300B649CA /* ContentView.swift in Sources */,
 				8A81E6F72CB5441300B649CA /* Item.swift in Sources */,
+				8A41E3462CBD0D75004286B9 /* DataControllerProtocol.swift in Sources */,
 				8A4BA03E2CB6737A000D16F9 /* Record.swift in Sources */,
 				8A4BA0442CB67FEF000D16F9 /* RecordView.swift in Sources */,
 				8A81E74E2CB548B200B649CA /* SessionDelegator.swift in Sources */,
+				8A41E33C2CBD074E004286B9 /* SyncData.swift in Sources */,
 				8A5C117F2CBAE13300CF6EA5 /* HomeView.swift in Sources */,
 				8A8092332CB5A07F00F4E940 /* BookSessionDelegator.swift in Sources */,
 				8A81E7482CB5475B00B649CA /* TodoView.swift in Sources */,
@@ -630,7 +667,9 @@
 				8A5C117D2CBAD34100CF6EA5 /* BookAddView.swift in Sources */,
 				8A5D52382CBB953A00A7F45E /* DataController.swift in Sources */,
 				8A4BA0422CB67FE6000D16F9 /* RecordManager.swift in Sources */,
+				8A41E3402CBD0C90004286B9 /* WCSessionProtocol.swift in Sources */,
 				8A80923B2CB658D200F4E940 /* BookManager.swift in Sources */,
+				8A41E33A2CBD0727004286B9 /* RecordDTO.swift in Sources */,
 				8A80923F2CB65F9D00F4E940 /* BookView.swift in Sources */,
 				8A65F0322CBB9CDD0074F458 /* WatchConnectivityManager.swift in Sources */,
 				8A81E7572CB549D400B649CA /* TodoManager.swift in Sources */,
@@ -641,7 +680,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A41E3382CBD05A0004286B9 /* MockWatchConnectivityManager.swift in Sources */,
+				8A41E3422CBD0CD5004286B9 /* MockWCSession.swift in Sources */,
+				8A41E3482CBD0DE3004286B9 /* MockDataController.swift in Sources */,
+				8A41E3362CBD04A4004286B9 /* WatchConnectivityManagerTest.swift in Sources */,
 				8A81E6FB2CB5441600B649CA /* WatchSampleTests.swift in Sources */,
+				8A41E3342CBD043E004286B9 /* DataControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

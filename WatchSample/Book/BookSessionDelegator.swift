@@ -48,7 +48,9 @@ class BookSessionDelegator: NSObject, WCSessionDelegate, ObservableObject {
         if WCSession.default.isReachable {
             do {
                 let data = try JSONEncoder().encode(books)
-                WCSession.default.sendMessage(["type": "syncBooks", "books": data], replyHandler: nil) { error in
+                WCSession.default.sendMessage(["type": "syncBooks", "books": data], replyHandler: { reply in
+                    print("Send Books To Watch Reply: \(reply)")
+                }) { error in
                     print("Error sending books to watch: \(error.localizedDescription)")
                 }
             } catch {

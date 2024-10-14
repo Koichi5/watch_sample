@@ -27,7 +27,9 @@ class BookSessionDelegator: NSObject, WCSessionDelegate, ObservableObject {
         if WCSession.default.isReachable {
             do {
                 let data = try JSONEncoder().encode(book)
-                WCSession.default.sendMessage(["type": type, "book": book], replyHandler: nil) { error in
+                WCSession.default.sendMessage(["type": type, "book": book], replyHandler: { reply in
+                    print("Send data Reply: \(reply)")
+                }) { error in
                     print("Error sending book to phone: \(error.localizedDescription)")
                 }
             } catch {
@@ -38,7 +40,9 @@ class BookSessionDelegator: NSObject, WCSessionDelegate, ObservableObject {
     
     func deleteBookOnPhone(bookId: UUID) {
         if WCSession.default.isReachable {
-            WCSession.default.sendMessage(["type": "deleteBook", "bookId": bookId.uuidString], replyHandler: nil) { error in
+            WCSession.default.sendMessage(["type": "deleteBook", "bookId": bookId.uuidString], replyHandler: { reply in
+                print("Delete Book data Reply: \(reply)")
+            }) { error in
                 print("Error sending delete request to phone: \(error.localizedDescription)")
             }
         }
